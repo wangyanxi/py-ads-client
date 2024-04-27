@@ -1,0 +1,126 @@
+# Guide (user-friendly):
+# https://packaging.python.org/en/latest/guides/writing-pyproject-toml/
+
+# Specification (technical, formal):
+# https://packaging.python.org/en/latest/specifications/pyproject-toml/
+
+
+# Choosing a build backend:
+# https://packaging.python.org/en/latest/tutorials/packaging-projects/#choosing-a-build-backend
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+
+[project]
+# This is the name of your project. The first time you publish this
+# package, this name will be registered for you. It will determine how
+# users can install this project, e.g.:
+#
+# $ pip install sampleproject
+#
+# And where it will live on PyPI: https://pypi.org/project/sampleproject/
+#
+# There are some restrictions on what makes a valid project name
+# specification here:
+# https://packaging.python.org/specifications/core-metadata/#name
+name = "py-ads-client"
+
+# Versions should comply with PEP 440:
+# https://www.python.org/dev/peps/pep-0440/
+#
+# For a discussion on single-sourcing the version, see
+# https://packaging.python.org/guides/single-sourcing-package-version/
+dynamic = ["version"]
+
+# This is a one-line description or tagline of what your project does. This
+# corresponds to the "Summary" metadata field:
+# https://packaging.python.org/specifications/core-metadata/#summary
+description = "TwinCAT ADS client for Python."
+
+# readme = "README.md"
+
+requires-python = ">=3.8"
+
+license = {file = "LICENSE"}
+
+keywords = ["TwinCAT", "ADS"]
+
+authors = [
+  { name = "Yanxi Wang", email = "wangyanxi@users.noreply.github.com" },
+]
+
+# Classifiers help users find your project by categorizing it.
+#
+# For a list of valid classifiers, see https://pypi.org/classifiers/
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3 :: Only",
+  "Typing :: Typed"
+]
+
+# This field lists other packages that your project depends on to run.
+# Any package you put here will be installed by pip when your project is
+# installed, so they must be valid existing projects.
+#
+# For an analysis of this field vs pip's requirements files see:
+# https://packaging.python.org/discussions/install-requires-vs-requirements/
+dependencies = [
+  "typing-extensions~=4.9"
+]
+
+
+[project.urls]
+Homepage = "https://github.com/wangyanxi/py-ads-client"
+Issues = "https://github.com/wangyanxi/py-ads-client/issues"
+Source = "https://github.com/wangyanxi/py-ads-client"
+Documentation = "https://py-ads-client.readthedocs.io"
+
+[tool.pdm.build]
+# https://backend.pdm-project.org/build_config/
+package-dir = "src"
+
+[tool.pdm.version]
+source = "scm"
+tag_regex = 'v(?P<version>[0-9]+\.[0-9]+\.[0-9]+)$'
+
+[tool.mypy]
+strict = true
+
+[tool.autoflake]
+in-place = true
+remove-all-unused-imports = true
+ignore-init-module-imports = true
+remove-duplicate-keys = true
+
+[tool.black]
+quiet = true
+line-length = 120
+target-version = ['py38']
+
+[tool.isort]
+# https://pycqa.github.io/isort/docs/configuration/multi_line_output_modes.html
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+line_length = 120
+ensure_newline_before_comments = true
+sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
+
+[tool.coverage.run]
+omit = [
+  "*/site-packages/*",
+  '*/tests/*'
+]
+
+[tool.coverage.report]
+show_missing = true
+skip_empty = true
