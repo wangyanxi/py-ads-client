@@ -1,0 +1,47 @@
+---
+
+name: Test Python package
+
+on: # yamllint disable-line rule:truthy
+  push:
+    branches:
+      - master
+      - dev/*
+
+# When running in a PR, cancel in-progress builds before when starting a new one.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+# https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+jobs:
+  test:
+
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: pip install -r .github/requirements.txt
+
+      - name: Type check
+        run: mypy src/
+
+      - name: Lint
+        run: flake8 src/
+
+      - name: Test
+        run: coverage run -m pytest src/
+
+      - name: Coverage
+        run: coverage report
