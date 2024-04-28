@@ -4,3 +4,5 @@ __pycache__/
 .pdm-python
 dist/
 _build/
+py_ads_client/version.py
+.pdm-build/

@@ -83,13 +83,13 @@ Issues = "https://github.com/wangyanxi/py-ads-client/issues"
 Source = "https://github.com/wangyanxi/py-ads-client"
 Documentation = "https://py-ads-client.readthedocs.io"
 
-[tool.pdm.build]
-# https://backend.pdm-project.org/build_config/
-package-dir = "src"
-
 [tool.pdm.version]
 source = "scm"
 tag_regex = 'v(?P<version>[0-9]+\.[0-9]+\.[0-9]+)$'
+# pdm-backend will rewrite the whole file each time, so you can't have additional contents in that file.
+# https://backend.pdm-project.org/metadata/#writing-dynamic-version-to-file
+write_to = "py_ads_client/version.py"
+write_template = "__version__ = '{}'"
 
 [tool.mypy]
 strict = true
