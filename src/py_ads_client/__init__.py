@@ -28,8 +28,4 @@ from .types import (  # noqa: F401
     WORD,
     WSTRING,
 )
-
-try:
-    from .version import __version__  # type: ignore # noqa: F401
-except ImportError:
-    pass
+from .version import __version__  # noqa: F401
