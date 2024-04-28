@@ -28,3 +28,4 @@ from .types import (  # noqa: F401
     WORD,
     WSTRING,
 )
+from .version import __version__  # noqa: F401
