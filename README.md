@@ -1,7 +1,5 @@
 # py-ads-client
 
-## Description
-
 `py-ads-client` is a Python library for communicating with Beckhoff's TwinCAT PLC.
 
 ## Installation
@@ -14,7 +12,7 @@ pip install py-ads-client
 
 ## Usage
 
-```
+```python
 from py_ads_client import ARRAY, INT, ADSClient, ADSSymbol
 
 client = ADSClient(local_ams_net_id=local_ams_net_id)
