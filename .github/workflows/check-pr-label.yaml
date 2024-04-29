@@ -1,0 +1,26 @@
+name: Check PR labels
+
+on:
+  # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+
+jobs:
+  check-labels:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check
+        uses: actions/github-script@v7
+        # https://github.com/actions/github-script
+        with:
+          script: |
+            console.log(context)
+            const response = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number
+            });
+            console.log(response);
+            if (response.data.labels.length === 0) {
+              throw new Error("Please add a label to the PR");
+            }
