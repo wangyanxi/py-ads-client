@@ -14,7 +14,8 @@ jobs:
         # https://github.com/actions/github-script
         with:
           script: |
-            console.log(context)
+            console.log(context.repo)
+            console.log(context.constructor.name)
             const response = await github.rest.pulls.get({
               owner: context.repo.owner,
               repo: context.repo.repo,
