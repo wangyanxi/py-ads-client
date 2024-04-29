@@ -14,14 +14,11 @@ jobs:
         # https://github.com/actions/github-script
         with:
           script: |
-            console.log(context.repo)
-            console.log(context.constructor.name)
             const response = await github.rest.pulls.get({
               owner: context.repo.owner,
               repo: context.repo.repo,
               pull_number: context.issue.number
             });
-            console.log(response);
             if (response.data.labels.length === 0) {
               throw new Error("Please add a label to the PR");
             }
