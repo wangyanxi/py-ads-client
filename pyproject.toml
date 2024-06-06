@@ -62,7 +62,6 @@ classifiers = [
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
-  "Programming Language :: Python :: 3 :: Only",
   "Typing :: Typed"
 ]
 
@@ -78,9 +77,10 @@ dependencies = [
 
 
 [project.urls]
-Homepage = "https://github.com/wangyanxi/py-ads-client"
+# PyPi will show a specific icon based on name and URL.
+# https://github.com/pypi/warehouse/blob/main/warehouse/templates/packaging/detail.html
+GitHub = "https://github.com/wangyanxi/py-ads-client"
 Issues = "https://github.com/wangyanxi/py-ads-client/issues"
-Source = "https://github.com/wangyanxi/py-ads-client"
 Documentation = "https://py-ads-client.readthedocs.io"
 
 [tool.pdm.version]
