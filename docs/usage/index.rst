@@ -13,3 +13,4 @@ Usage
     access_struct_variable
     access_array_variable
     device_notification
+    method_call

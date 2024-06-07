@@ -109,7 +109,13 @@ class ADSClient:
     def _read_socket_background(self, socket: socket.socket) -> None:
         buffer: bytes = b""
         while True:
-            data = socket.recv(4096)
+            try:
+                data = socket.recv(4096)
+            except Exception:
+                # tested on macOS 13.6.6, python 3.11,
+                # the behavior is inconsistent compare to Linux, it throws an exception when the socket is closed
+                # <class 'OSError'> [Errno 9] Bad file descriptor
+                break
             # A returned empty bytes object indicates that the client has disconnected.
             if len(data) == 0:
                 self.__logger.info("connection disconnected")
